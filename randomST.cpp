@@ -1,3 +1,11 @@
+/*
+    @author: Samuel Teague
+    @date: 05 Dec 2018 (most recent)
+    @file: randomST.cpp
+    @description: This file contains a C++ program to choose a random Star Trek episode.
+        This is for when a life crisis hits and you can't choose what Star Trek episode to watch.
+*/
+
 #include <stdlib.h>
 #include <string>
 #include <fstream>
@@ -10,6 +18,11 @@
 
 std::vector<std::string> getEpisodesFromFile(std::string fileName)
 {
+    /*
+        @param: takes a string fileName, the file to read the Star Trek episodes from.
+        @return: a vector of strings, each string holding the name and description of a 
+            single Star Trek episode
+    */
     std::vector<std::string> toFill;
     std::ifstream file;
 
