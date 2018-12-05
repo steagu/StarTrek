@@ -13,6 +13,15 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
+#include <exception>
+
+//basic exception class
+
+class file_not_found : public std::logic_error
+{
+public:
+    file_not_found(std::string s) : std::logic_error(s) {}
+}
 
 
 
@@ -28,22 +37,21 @@ std::vector<std::string> getEpisodesFromFile(std::string fileName)
 
     file.open(fileName);
 
-    if (file.is_open())
+    if (!file.is_open())
+        throw file_not_found("Unable to open file " + fileName);
+
+    std::string episodeData;
+    while(!file.eof())
     {
 
-        std::string episodeData;
-        while(!file.eof())
-        {
+        std::getline(file, episodeData);
 
-            std::getline(file, episodeData);
+        toFill.push_back(episodeData);
 
-            toFill.push_back(episodeData);
-
-            episodeData = "";
-        }
-        file.close();
+        episodeData = "";
     }
-
+    file.close();
+    
     return toFill;
 }
 
